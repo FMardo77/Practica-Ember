@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+	queryParams: ['view'],
+	view: null,
+
 	query: null,
 	anotherArray: [1,2,3,4,5],
 	filteredModel: Ember.computed('query', 'model.[]', function(){
@@ -33,6 +36,19 @@ export default Ember.Controller.extend({
 			console.log('Soy el destroyTaskInController que llamó el Controller');
 			this.send('destroyTask', item);
 		},
-		otroAction(){}
+		otroAction(){},
+		guardaTask(t){
+			//this.send('doSave',t);
+			t.save()
+		},
+		nohagasnada(task){
+			//task.rollback()
+			this.get('task').rollback()
+			//t.rollback()
+		},
+		completarencontroller(item){
+			complete: this.set('currentModel.complete');
+
+		}
 	}
 });
